@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="https://glitch.com/favicon.ico" />
+
+  <title>Hulpmiddel om vlindereitjes te tellen in de kampina</title>
+
+  <!-- import the webpage's stylesheet -->
+  <link rel="stylesheet" href="/style.css" />
+
+  <!-- import the webpage's javascript file -->
+  <script src="/script.js" type="module"></script>
+</head>
+
+<body>
+  <!-- this is the start of content -->
+  <header>
+    <div class="status observations">
+      <strong>Observaties: </strong>
+      <output>0</output>
+    </div>
+    <div class="status location">
+      <strong>Locatie: </strong>
+      <output>❌</output>
+    </div>
+  </header>
+  <main>
+    <div class="carousel">
+      <div>
+        <h1>Welkom!</h1>
+        <p>
+          Blablabkfjsdf
+        </p>
+        <p>
+          Klik hier om geotracking aan te zetten:
+          <br />
+          <button class="start-location">📍 Start geolocatie</button>
+        </p>
+      </div>
+      <div>
+        <h1>Observatie</h1>
+        <p>(Voor <strong>één plant</strong>.)</p>
+        <form>
+          <label>Locatie: <input name="location" disabled value="❌ onbekend..."></label>
+          <fieldset style="background: rgba(255, 0, 0, 10%)">
+            <legend>Aantal <strong>stammen</strong></legend>
+            <aantal-input required min=1 max=20></aantal-input>
+          </fieldset>
+          <fieldset style="background: rgba(0, 255, 0, 10%)">
+            <legend>Aantal <strong>knoppen</strong></legend>
+            <aantal-input min=0 max=40></aantal-input>
+          </fieldset>
+          <fieldset style="background: rgba(0, 0, 255, 10%)">
+            <legend>Aantal <strong>eitjes</strong></legend>
+            <aantal-input required min=0 max=100></aantal-input>
+          </fieldset>
+          <input type="submit" class="opslaan" value="Opslaan" />
+        </form>
+      </div>
+      <div>
+        <h1>Klaar?</h1>
+        <p>Download dan je logboek!</p>
+        <p>Naam van het bestand: <br><input class="filename"></p>
+        <p>
+        <a class="log csv"><button>Download csv</button></a>
+          </p>
+        <a class="log json" style="display: none"><button>Download json</button></a>
+        <h1>
+          Opnieuw beginnen?
+        </h1>
+        <p>
+          Je kunt alle observaties verwijderen:
+        </p>
+        <p>
+          <button class="delete_observations">
+            ⚠ Verwijder observaties
+          </button>
+        </p>
+        <h1>
+          Groetjes!
+        </h1>
+        <p>
+          Dit programma is gemaakt door <a href="https://github.com/fonsp">Fons van der Plas</a> voor mensen die vlindereitjes tellen! Het programma is gratis en open source (<a href="/LICENSE.md">MIT licentie</a>). Je kan de ontwikkeling van het programma steunen door vlinderfoto's te e-mailen aan fons: <a href="mailto:fons@plutojl.org">fons@plutojl.org</a>.
+        </p>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <button>⬅ terug</button>
+    <button>volgende ➡</button>
+  </footer>
+
+  <div class="woohoo">
+    <div class="duimpje">
+      🦋
+    </div>
+
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+/* a minimalist set of CSS resets */
+
+/* default to border-box */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* adjust typography defaults */
+body {
+  margin: 0;
+  /*   line-height: 1.5; */
+  /*   overflow: hidden; */
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+header,
+footer {
+  flex: 1 0 auto;
+}
+
+main {
+  flex: 0 1 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* images and videos max out at full width */
+img,
+video {
+  height: auto;
+  max-width: 100%;
+}
+
+header {
+  display: flex;
+  gap: 1rem;
+  margin: 0.4rem;
+  background: hsl(189.65deg 25.39% 89.57%);
+  padding: 0.1rem 0.7rem;
+  border-radius: 0.3rem;
+}
+
+header .status {
+  display: inline-block;
+}
+
+footer {
+  margin: 0.4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.carousel {
+  flex: 0 1 auto;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  /*   height: 100vh; */
+
+  scroll-snap-type: x mandatory;
+}
+
+.carousel>div {
+  padding: 0.4rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  flex: none;
+  width: 100%;
+
+  scroll-snap-align: center;
+}
+
+aantal-input {
+  display: grid;
+  grid-template-columns: repeat(5, max-content);
+}
+
+aantal-input>.zero {
+  grid-column-end: span 5;
+}
+
+.opslaan {
+  font-size: 2rem;
+  margin: 1rem;
+}
+
+.flash {
+  animation: 0.5s 1 flash;
+}
+
+@keyframes flash {
+  from {
+    transform: scale(1.2);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.woohoo {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #00000040;
+  font-size: 5rem;
+  display: grid;
+  place-content: center;
+  touch-action: none;
+  pointer-events: none;
+  animation: opacity;
+  opacity: 0;
+}
+
+.duimpje {
+  background: white;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.woohoo.show .duimpje {
+  animation: 2s 1 woosh;
+}
+
+.woohoo.show {
+  animation: 2s 1 makevisible;
+}
+
+@keyframes makevisible {
+
+  from,
+  to {
+    opacity: 0;
+  }
+
+  10%,
+  90% {
+    opacity: 1;
+  }
+}
+
+@keyframes woosh {
+  from {
+    transform: translate(-70vw, 20vw) rotate(-20deg);
+  }
+
+  20%,
+  80% {
+    transform: none;
+  }
+
+  to {
+    transform: translate(70vw, -20vw) rotate(-20deg);
+  }
+}
