@@ -172,3 +172,21 @@ aantal-input>.zero {
     transform: translate(70vw, -20vw) rotate(-20deg);
   }
 }
+
+.save-message {
+  background: #566d56;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  text-align: center;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.save-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}

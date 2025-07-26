@@ -18,7 +18,9 @@ const writeCsv = (list) =>
 
 
 if(window.location.protocol === "http:"){
-  window.location.protocol = "https:"
+  if(!["localhost", "127.0.0.1", "0.0.0.0"].includes(window.location.hostname)){
+    window.location.protocol = "https:"
+  }
 }
 
 
@@ -81,6 +83,7 @@ try {
   });
 
   let log = [];
+  let observationsSaved = true; // Track if observations have been saved since last change
   try {
     log = JSON.parse(localStorage.getItem("laatste_log_v2")) ?? [];
   } catch (err) { }
@@ -129,7 +132,7 @@ try {
 
 
   qAll("aantal-input").forEach((el) => {
-    const zz = `fdsasdf${String(Math.random()).substr(3)}`;
+    const zz = `fdsasdf${String(Math.random()).slice(2)}`;
 
     for (
       let i = Number(el.getAttribute("min") ?? 0);
@@ -178,6 +181,7 @@ try {
         eitjes: form.querySelectorAll("aantal-input")[2].value,
       },
     ];
+    observationsSaved = false; // Mark as unsaved since new observation was added
     update_log();
     flash(q(`.status.observations`));
     triggeranim(q(".woohoo"), "show");
@@ -189,20 +193,30 @@ try {
   });
 
   q(`.delete_observations`).addEventListener("click", (e) => {
+    // Check if there are unsaved observations
+    if (log.length > 0 && !observationsSaved) {
+      if (!confirm(
+        "⚠️ Waarschuwing: Je hebt observaties die nog niet zijn opgeslagen!\n\n" +
+        "Als je doorgaat verlies je al je niet-opgeslagen gegevens.\n\n" +
+        "Weet je zeker dat je ze wilt verwijderen?"
+      )) {
+        return; // User wants to save first, abort deletion
+      }
+    }
+    
     if (
       confirm(
         "Weet je zeker dat je alle observaties wilt verwijderen?\n\nDit kan je niet ongedaan maken."
       )
     ) {
       log = [];
+      observationsSaved = true; // Reset saved status since there are no observations
       update_log();
     }
   });
 
   const footerbuttons = Array.from(qAll("footer button"));
   footerbuttons.forEach((el, i) => {
-    let forward = i === 1;
-
     el.addEventListener("click", () => {
       let carousel = q(".carousel");
       let width = carousel.children[0].offsetWidth;
@@ -218,7 +232,20 @@ try {
     });
   });
 
-
+  // Handle CSV download click
+  q("a.log.csv").addEventListener("click", () => {
+    // Mark observations as saved
+    observationsSaved = true;
+    
+    // Show the save message
+    const saveMessage = q(".save-message");
+    saveMessage.classList.add("show");
+    
+    // Remove highlighting later
+    setTimeout(() => {
+      saveMessage.classList.remove("show");
+    }, 30 * 1000);
+  });
 
   // const submit = form.querySelector(`input[type="submit"]`)
 } catch (err) {
